@@ -1,0 +1,2 @@
+print 'wechat!'
+print "test!"
