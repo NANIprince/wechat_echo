@@ -1,22 +1,13 @@
-import os
-
 import sae
+import urlparse
 import hashlib
-import web
 
-urls = (
-    '/', 'wechat'
-)
-
-
-
-class echo:
-    def GET(self):
-    	data = web.import()
-    	echostr = data.echostr
-        return echostr
-
-
-app = web.application(urls, globals()).wsgifunc()
+def app(environ, start_response):
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/html: charset=utf-8')]
+    start_response(status, response_headers)
+    query=environ["QUERY_STRING"]
+    echostr=urlparse.parse_qs(query)['echostr']
+    return echostr
 
 application = sae.create_wsgi_app(app)
